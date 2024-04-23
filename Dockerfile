@@ -1,14 +1,22 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y postgresql-client
 
 WORKDIR /app
 
 COPY pyproject.toml .
 COPY poetry.lock .
-RUN pip install poetry && poetry config virtualenvs.create false && poetry install --no-dev --no-interaction --no-ansi
+
+RUN pip install --no-cache-dir poetry \
+    && poetry config virtualenvs.create false \
+    && poetry install --only main --no-interaction --no-ansi
+
 COPY . .
+COPY prestart.sh .
+RUN ls -la
 
 RUN chmod +x prestart.sh
-
-ENTRYPOINT ["./prestart.sh"]
+RUN ls -la
+ENTRYPOINT  ["bash", "./prestart.sh"]
 
 CMD ["python", "main.py"]

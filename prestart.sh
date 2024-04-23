@@ -1,5 +1,7 @@
 echo "Starting"
 
-psql -U user -d db -f create_table.sql
+export PGPASSWORD=password
+
+psql -U user -d db -f /app/create_table.sql --host=postgres
 
 exec "$@"

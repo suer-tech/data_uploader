@@ -20,7 +20,7 @@ services:
       depends_on:
         - postgres
       volumes:
-        - ./path/to/your/code:/app
+        - ./:/app
       environment:
         - PYTHONUNBUFFERED=1
 
