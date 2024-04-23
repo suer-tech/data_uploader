@@ -1,8 +1,11 @@
+import logging
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
 import psycopg2
 from psycopg2 import sql
+
+logging.basicConfig(filename="data_uploader.log", level=logging.INFO)
 
 
 def create_connection():
@@ -40,6 +43,8 @@ def insert_sku(connection, sku_data):
         )
 
         cursor.execute(insert_query, sku_data)
+
+        logging.info("Inserted SKU with UUID: %s", sku_data["uuid"])
 
 
 def process_xml_file(xml_file):
