@@ -19,4 +19,4 @@ RUN chmod +x prestart.sh
 RUN ls -la
 ENTRYPOINT  ["bash", "./prestart.sh"]
 
-CMD ["python", "main.py"]
+CMD ["python", "uploader/main.py"]
