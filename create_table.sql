@@ -5,7 +5,7 @@ create table public.sku
     product_id             bigint,
     title                  text,
     description            text,
-    brand                  integer,
+    brand                  text,
     seller_id              integer,
     seller_name            text,
     first_image_url        text,
@@ -54,11 +54,13 @@ comment on column public.sku.rating_value is 'Рейтинг товара (0-5)'
 
 comment on column public.sku.barcode is 'Штрихкод';
 
-create index sku_brand_index
+create index if not exists sku_brand_index
     on public.sku (brand);
 
-create unique index sku_marketplace_id_sku_id_uindex
+create unique index if not exists sku_marketplace_id_sku_id_uindex
     on public.sku (marketplace_id, product_id);
 
-create unique index sku_uuid_uindex
+create unique index if not exists sku_uuid_uindex
     on public.sku (uuid);
+
+alter table public.sku alter column brand type text;
