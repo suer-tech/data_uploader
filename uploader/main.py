@@ -166,5 +166,5 @@ def process_xml_file(xml_file_path):
 
 
 if __name__ == "__main__":
-    xml_file_path = "uploader/elektronika_products_20240423_114945.xml"
+    xml_file_path = os.getenv("XML_FILE")
     process_xml_file(xml_file_path)
